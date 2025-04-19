@@ -1,51 +1,25 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>All Messages</title>
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyCi7ZEBHbFxCEteOjvj-5aC7OhtadHwBYo",
-      authDomain: "wallofmessages-94b11.firebaseapp.com",
-      projectId: "wallofmessages-94b11",
-      storageBucket: "wallofmessages-94b11.appspot.com",
-      messagingSenderId: "8844212877",
-      appId: "1:8844212877:web:d1069b7c1dbc576af8c0c4",
-      measurementId: "G-835E8RTBRG"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    async function showMessages() {
-      const querySnapshot = await getDocs(collection(db, "notes"));
-      const wall = document.getElementById("wall");
-      querySnapshot.forEach((doc) => {
-        const note = document.createElement("div");
-        note.className = "note";
-        note.textContent = doc.data().message;
-        wall.appendChild(note);
-      });
-    }
-
-    window.addEventListener("DOMContentLoaded", showMessages);
-  </script>
-  <style>
-    .note {
-      background: #fff176;
-      padding: 10px 15px;
-      margin: 10px;
-      border-radius: 8px;
-      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h2>All Posted Notes</h2>
   <div id="wall"></div>
+
+  <script type="module">
+    import { fetchMessages } from './wall.js';
+
+    const wall = document.getElementById('wall');
+
+    fetchMessages((data) => {
+      const note = document.createElement("div");
+      note.className = "note";
+      note.textContent = data.message;
+      wall.appendChild(note);
+    });
+  </script>
 </body>
 </html>
