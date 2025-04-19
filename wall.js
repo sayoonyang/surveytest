@@ -5,10 +5,13 @@ import {
   onSnapshot
 } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
+// Update to use a single collection, 'notes'
 const form = document.getElementById('messageForm');
 const input = document.getElementById('messageInput');
 const wall = document.getElementById('wall');
-const notesRef = collection(db, 'messages');
+
+// Reference to the 'notes' collection
+const notesRef = collection(db, 'notes'); 
 
 let zIndexCounter = 1;
 
@@ -17,18 +20,19 @@ form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const message = input.value.trim();
   if (message) {
+    // Adding the message to the 'notes' collection
     await addDoc(notesRef, {
       text: message,
       x: Math.random() * (wall.clientWidth - 180),
       y: Math.random() * (wall.clientHeight - 120)
     });
-    input.value = '';
+    input.value = ''; // Clear input after submission
   }
 });
 
 // 📡 Real-time listener
 onSnapshot(notesRef, snapshot => {
-  wall.innerHTML = '';
+  wall.innerHTML = ''; // Clear the wall before adding new notes
   snapshot.forEach(doc => {
     const data = doc.data();
     const note = document.createElement('div');
@@ -37,7 +41,7 @@ onSnapshot(notesRef, snapshot => {
     note.style.left = `${data.x}px`;
     note.style.top = `${data.y}px`;
     makeDraggable(note);
-    wall.appendChild(note);
+    wall.appendChild(note); // Add note to wall
   });
 });
 
