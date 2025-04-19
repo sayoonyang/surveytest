@@ -1,11 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Feedback</title>
+  <meta charset="UTF-8">
+  <title>Sticky Notes Wall</title>
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCi7ZEBHbFxCEteOjvj-5aC7OhtadHwBYo",
+      authDomain: "wallofmessages-94b11.firebaseapp.com",
+      projectId: "wallofmessages-94b11",
+      storageBucket: "wallofmessages-94b11.appspot.com",
+      messagingSenderId: "8844212877",
+      appId: "1:8844212877:web:d1069b7c1dbc576af8c0c4",
+      measurementId: "G-835E8RTBRG"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window.db = db; // expose db for use in inline scripts
+  </script>
+
+  <style>
+    /* Your CSS here */
+  </style>
 </head>
 <body>
-  <iframe data-tally-src="https://tally.so/embed/nrq7EX?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="72" frameborder="0" marginheight="0" marginwidth="0" title="Survey Test"></iframe>
-  <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
+  <h2>Drop your message 💬</h2>
+  <form id="messageForm">
+    <input type="text" id="messageInput" placeholder="Type your message..." required />
+    <button type="submit">Post</button>
+  </form>
+
+  <div id="wall"></div>
+
+  <script type="module">
+    import { collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+    const form = document.getElementById('messageForm');
+    const input = document.getElementById('messageInput');
+    const db = window.db;
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const message = input.value.trim();
+      if (message) {
+        await addDoc(collection(db, "notes"), {
+          message: message,
+          created: Date.now()
+        });
+        input.value = '';
+        alert("Message posted!");
+      }
+    });
+  </script>
 </body>
 </html>
