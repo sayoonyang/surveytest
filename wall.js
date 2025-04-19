@@ -44,6 +44,7 @@ if (form) {
       input.value = '';
       email.value = '';
       alert('Submitted!');
+      window.location.href = 'results.html';
     }
   });
 }
