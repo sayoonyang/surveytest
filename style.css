@@ -1,27 +1,60 @@
 body {
   font-family: sans-serif;
-  margin: 20px;
+  margin: 0;
+  padding: 20px;
   background: #f9f9f9;
 }
+
+header {
+  background: #ffe082;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
+nav a {
+  margin-right: 10px;
+  text-decoration: none;
+  color: #333;
+}
+
+section {
+  margin-bottom: 50px;
+}
+
 form {
   margin-bottom: 20px;
 }
-#wall {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+
+input {
+  padding: 8px;
+  font-size: 16px;
 }
+
+button {
+  padding: 8px 12px;
+  font-size: 16px;
+}
+
+#wall {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 300px);
+  border: 2px dashed #ccc;
+  background-color: #fff;
+}
+
 .note {
+  position: absolute;
   background: #fff176;
   padding: 10px 15px;
-  width: 150px;
+  width: 160px;
   min-height: 100px;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
   border-radius: 8px;
   cursor: grab;
-  position: relative;
+  user-select: none;
 }
+
 .note:active {
   cursor: grabbing;
 }
-
