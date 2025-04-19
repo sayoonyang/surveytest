@@ -2,36 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Wall of Messages</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Survey Test</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <h1>Pick One Section</h1>
+  <div class="sections">
+    <button data-section="Section A">Section A</button>
+    <button data-section="Section B">Section B</button>
+    <button data-section="Section C">Section C</button>
+    <button data-section="Section D">Section D</button>
+  </div>
 
-  <header>
-    <h1>🧱 Wall of Messages</h1>
-    <nav>
-      <a href="#form-section">Leave a Message</a> |
-      <a href="#results-section">View Messages</a>
-    </nav>
-  </header>
+  <form id="surveyForm" style="display: none;">
+    <textarea id="answerInput" maxlength="600" placeholder="Write your answer here..."></textarea>
+    <input type="email" id="emailInput" placeholder="Enter your email" required>
+    <button type="submit">Submit</button>
+  </form>
 
-  <!-- Form Section -->
-  <section id="form-section">
-    <h2>Drop your message 💬</h2>
-    <form id="messageForm">
-      <input type="text" id="messageInput" placeholder="Type your message..." required />
-      <button type="submit">Post</button>
-    </form>
-  </section>
-
-  <!-- Results Section -->
-  <section id="results-section">
-    <h3>Drag the notes around 👇</h3>
-    <div id="wall"></div>
-  </section>
-
-  <!-- Firebase & Wall Logic -->
+  <script type="module" src="./firebase-config.js"></script>
   <script type="module" src="./wall.js"></script>
 </body>
 </html>
-
