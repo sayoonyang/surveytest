@@ -1,1 +1,27 @@
+body {
+  font-family: sans-serif;
+  margin: 20px;
+  background: #f9f9f9;
+}
+form {
+  margin-bottom: 20px;
+}
+#wall {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.note {
+  background: #fff176;
+  padding: 10px 15px;
+  width: 150px;
+  min-height: 100px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  border-radius: 8px;
+  cursor: grab;
+  position: relative;
+}
+.note:active {
+  cursor: grabbing;
+}
 
