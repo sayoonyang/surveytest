@@ -1,7 +1,7 @@
 
 // firebase-config.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCi7ZEBHbFxCEteOjvj-5aC7OhtadHwBYo",
@@ -16,4 +16,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-export { db };
+// Save message
+await addDoc(collection(db, "messages"), {
+  content: message,
+  timestamp: new Date()
+});
+
