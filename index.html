@@ -3,30 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Sticky Notes Wall</title>
-  <!-- Firebase -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyCi7ZEBHbFxCEteOjvj-5aC7OhtadHwBYo",
-      authDomain: "wallofmessages-94b11.firebaseapp.com",
-      projectId: "wallofmessages-94b11",
-      storageBucket: "wallofmessages-94b11.appspot.com",
-      messagingSenderId: "8844212877",
-      appId: "1:8844212877:web:d1069b7c1dbc576af8c0c4",
-      measurementId: "G-835E8RTBRG"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    window.db = db; // expose db for use in inline scripts
-  </script>
-
-  <style>
-    /* Your CSS here */
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h2>Drop your message 💬</h2>
@@ -35,26 +12,17 @@
     <button type="submit">Post</button>
   </form>
 
-  <div id="wall"></div>
-
   <script type="module">
-    import { collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+    import { postMessage } from './wall.js';
 
     const form = document.getElementById('messageForm');
     const input = document.getElementById('messageInput');
-    const db = window.db;
 
     form.addEventListener('submit', async e => {
       e.preventDefault();
-      const message = input.value.trim();
-      if (message) {
-        await addDoc(collection(db, "notes"), {
-          message: message,
-          created: Date.now()
-        });
-        input.value = '';
-        alert("Message posted!");
-      }
+      await postMessage(input.value);
+      input.value = '';
+      alert("Message posted!");
     });
   </script>
 </body>
