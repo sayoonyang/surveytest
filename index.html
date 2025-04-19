@@ -1,29 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Sticky Notes Wall</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Wall of Messages</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h2>Drop your message 💬</h2>
-  <form id="messageForm">
-    <input type="text" id="messageInput" placeholder="Type your message..." required />
-    <button type="submit">Post</button>
-  </form>
 
-  <script type="module">
-    import { postMessage } from './wall.js';
+  <header>
+    <h1>🧱 Wall of Messages</h1>
+    <nav>
+      <a href="#form-section">Leave a Message</a> |
+      <a href="#results-section">View Messages</a>
+    </nav>
+  </header>
 
-    const form = document.getElementById('messageForm');
-    const input = document.getElementById('messageInput');
+  <!-- Form Section -->
+  <section id="form-section">
+    <h2>Drop your message 💬</h2>
+    <form id="messageForm">
+      <input type="text" id="messageInput" placeholder="Type your message..." required />
+      <button type="submit">Post</button>
+    </form>
+  </section>
 
-    form.addEventListener('submit', async e => {
-      e.preventDefault();
-      await postMessage(input.value);
-      input.value = '';
-      alert("Message posted!");
-    });
-  </script>
+  <!-- Results Section -->
+  <section id="results-section">
+    <h3>Drag the notes around 👇</h3>
+    <div id="wall"></div>
+  </section>
+
+  <!-- Firebase & Wall Logic -->
+  <script type="module" src="wall.js"></script>
 </body>
 </html>
+
